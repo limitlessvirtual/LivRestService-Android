@@ -8,7 +8,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.2"
     }
     buildTypes {
         release {
@@ -27,23 +27,23 @@ ext {
 
     //For bintray and jcenter distribution
     bintrayRepo = 'maven'
-    bintrayName = 'restservice'
+    bintrayName = 'liv-rest-service'
 
-    publishedGroupId = 'com.example.sample'
-    libraryName = 'SampleLibrary'
-    artifact = 'sample-library' //This artifact name should be the same with library module name
+    publishedGroupId = 'tech.livx'
+    libraryName = 'Liv Rest Service'
+    artifact = 'restservice' //This artifact name should be the same with library module name
 
-    libraryDescription = 'Simple, clean and short description'
+    libraryDescription = 'DataService for Android'
 
-    siteUrl = 'https://github.com/username/sample-library'
-    gitUrl = 'https://github.com/username/sample-library.git'
+    siteUrl = 'https://github.com/limitlessvirtual/LivRestService-Android'
+    gitUrl = 'https://github.com/limitlessvirtual/LivRestService-Android.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '0.1.2'
 
-    developerId = 'your_id'
-    developerName = 'your_name'
-    developerEmail = 'your_email'
-    organization = 'your_organization' // if you push to organization's repository.
+    developerId = 'mitchdart'
+    developerName = 'Mitch Dart'
+    developerEmail = 'mitch@limitlessvirtual.com'
+    organization = '' // if you push to organization's repository.
     licenseName = 'The Apache Software License, Version 2.0'  //Example for license
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]

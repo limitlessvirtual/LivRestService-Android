@@ -19,12 +19,10 @@ import okhttp3.Response;
 
 /**
  * Rest Request
- * <p/>
  * Bugs: none known
  *
  * @author Mitch, LivX : livx.tech
  * @version 1.0
- * @date 2017/04/13
  */
 public abstract class RestRequest {
     protected static final String METHOD_POST = "POST";
@@ -40,7 +38,7 @@ public abstract class RestRequest {
     public void execute(final Context context, final long requestId, final RequestCallback callback) {
         this.handler = new Handler(context.getMainLooper());
 
-        Request request = buildRequest();
+        Request request = buildRequest(context);
 
         Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
@@ -90,13 +88,13 @@ public abstract class RestRequest {
         });
     }
 
-    private Request buildRequest() {
+    private Request buildRequest(Context context) {
         Request.Builder builder = new Request.Builder();
-        builder.method(getMethod(), (getBody()!= null) ? RequestBody.create(getMediaType(),getBody()) : null);
-        builder.url(getURL());
-        if (getHeaders() != null) {
-            for (String key : getHeaders().keySet()) {
-                builder.addHeader(key, getHeaders().get(key));
+        builder.method(getMethod(context), (getBody(context)!= null) ? RequestBody.create(getMediaType(context),getBody(context)) : null);
+        builder.url(getURL(context));
+        if (getHeaders(context) != null) {
+            for (String key : getHeaders(context).keySet()) {
+                builder.addHeader(key, getHeaders(context).get(key));
             }
         }
 
@@ -115,19 +113,19 @@ public abstract class RestRequest {
         return writer.toString();
     }
 
-    protected abstract MediaType getMediaType();
+    protected abstract MediaType getMediaType(Context context);
 
-    protected abstract String getURL();
+    protected abstract String getURL(Context context);
 
-    protected abstract Map<String, String> getHeaders();
+    protected abstract Map<String, String> getHeaders(Context context);
 
-    protected abstract byte[] getBody();
+    protected abstract byte[] getBody(Context context);
 
     protected abstract void onComplete(Context context, InputStream response) throws IOException;
 
     protected abstract void onError(Context context);
 
-    protected abstract String getMethod();
+    protected abstract String getMethod(Context context);
 
     public abstract boolean isAuthenticated();
 

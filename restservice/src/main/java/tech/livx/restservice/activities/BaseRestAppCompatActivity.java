@@ -8,20 +8,17 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ConcurrentHashMap;
 
 import tech.livx.restservice.requests.RestRequest;
 import tech.livx.restservice.services.DataService;
 
 /**
- * Description of class
- * <p/>
+ * Base Activity for any Activity using the RestService
  * Bugs: none known
  *
  * @author Mitch, LivX : livx.tech
- * @version 1.0
- * @date 2017/04/13
+ * @version 0.1.0
  */
 public abstract class BaseRestAppCompatActivity extends AppCompatActivity implements ServiceConnection, DataService.DataServiceListener {
 

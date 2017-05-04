@@ -27,22 +27,22 @@ public class WeatherRequest extends RestRequest {
     }
 
     @Override
-    protected MediaType getMediaType() {
+    protected MediaType getMediaType(Context context) {
         return null;
     }
 
     @Override
-    protected String getURL() {
+    protected String getURL(Context context) {
         return "https://httpbin.org/get";
     }
 
     @Override
-    protected Map<String, String> getHeaders() {
+    protected Map<String, String> getHeaders(Context context) {
         return null;
     }
 
     @Override
-    protected byte[] getBody() {
+    protected byte[] getBody(Context context) {
         return null;
     }
 
@@ -68,7 +68,7 @@ public class WeatherRequest extends RestRequest {
     }
 
     @Override
-    protected String getMethod() {
+    protected String getMethod(Context context) {
         return METHOD_GET;
     }
 

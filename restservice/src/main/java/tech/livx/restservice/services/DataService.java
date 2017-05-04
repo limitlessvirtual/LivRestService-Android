@@ -7,7 +7,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +18,10 @@ import tech.livx.restservice.requests.RestRequest;
 
 /**
  * Data Service used to manage api calls independently from activities
- * <p/>
  * Bugs: none known
  *
  * @author Mitch, LivX : livx.tech
  * @version 1.0
- * @date 2017/04/13
  */
 public class DataService extends Service {
     public static final String DATA_PREF = "data_prefs";
