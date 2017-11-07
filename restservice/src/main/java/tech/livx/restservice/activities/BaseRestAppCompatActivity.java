@@ -142,6 +142,17 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
         bindService(intent, this, BIND_AUTO_CREATE);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(isBound) {
+            if(!dataService.anyPending()) {
+                Intent intent = new Intent(this, DataService.class);
+                startService(intent);
+            }
+        }
+    }
+
     public abstract void onRequestComplete(String type, int code);
     public abstract void onRequestError(String type);
     public abstract void onLoading();
