@@ -41,13 +41,10 @@ public class MainActivity extends BaseRestAppCompatActivity {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doRequest(new WeatherRequest(), true);
+                doRequest(new WeatherRequest(), false);
                 resultTextView.setText("");
             }
         });
-
-        doRequest(new WeatherRequest(), true);
-        resultTextView.setText("");
 
         this.sharedPreferences = getSharedPreferences("weather", MODE_PRIVATE);
     }

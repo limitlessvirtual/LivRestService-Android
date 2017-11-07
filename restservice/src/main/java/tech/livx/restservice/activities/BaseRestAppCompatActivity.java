@@ -8,6 +8,8 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 import tech.livx.restservice.requests.RestRequest;
@@ -25,7 +27,7 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
     private boolean isBound = false;
     private DataService dataService;
     private ConcurrentHashMap<String, Long> currentRequests;
-    private Runnable runWhenServiceReady;
+    private List<Runnable> runWhenServiceReady = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,9 +39,6 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
 
             currentRequests = new ConcurrentHashMap<>();
         }
-
-        Intent intent = new Intent(this, DataService.class);
-        startService(intent);
     }
 
     @Override
@@ -76,8 +75,11 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
 
         isBound = true;
 
-        if(runWhenServiceReady != null) {
-            runWhenServiceReady.run();
+        if(runWhenServiceReady != null && !runWhenServiceReady.isEmpty()) {
+            for(int i = 0; i < runWhenServiceReady.size(); i++)
+                runWhenServiceReady.get(i).run();
+
+            runWhenServiceReady.clear();
         }
     }
 
@@ -94,8 +96,6 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
 
         if (dataService != null && isBound) {
 
-            runWhenServiceReady = null;
-
             onLoading();
             long requestId = dataService.doRequest(request, duplicate);
 
@@ -106,12 +106,12 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
 
 
         //Service isnt ready. Lets re run when it is
-        runWhenServiceReady = new Runnable() {
+        runWhenServiceReady.add(new Runnable() {
             @Override
             public void run() {
                 doRequest(request, duplicate);
             }
-        };
+        });
     }
 
     @Override
@@ -129,9 +129,19 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
     @Override
     protected void onPause() {
         super.onPause();
+
+        Runnable unbindService = new Runnable() {
+            @Override
+            public void run() {
+                dataService.removeListener(BaseRestAppCompatActivity.this);
+                unbindService(BaseRestAppCompatActivity.this);
+            }
+        };
+
         if (isBound) {
-            dataService.removeListener(this);
-            unbindService(this);
+            unbindService.run();
+        } else {
+            runWhenServiceReady.add(unbindService);
         }
     }
 
@@ -140,17 +150,6 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
         super.onResume();
         Intent intent = new Intent(this, DataService.class);
         bindService(intent, this, BIND_AUTO_CREATE);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if(isBound) {
-            if(!dataService.anyPending()) {
-                Intent intent = new Intent(this, DataService.class);
-                startService(intent);
-            }
-        }
     }
 
     public abstract void onRequestComplete(String type, int code);

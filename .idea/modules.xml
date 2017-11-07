@@ -5,8 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/LivRestService-Android.iml" filepath="$PROJECT_DIR$/LivRestService-Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/RestServiceSample.iml" filepath="$PROJECT_DIR$/RestServiceSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/restservice/restservice.iml" filepath="$PROJECT_DIR$/restservice/restservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/restservice/restservice.iml" filepath="$PROJECT_DIR$/restservice/restservice.iml" />
     </modules>
   </component>
