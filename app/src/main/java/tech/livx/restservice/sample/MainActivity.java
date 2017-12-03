@@ -1,5 +1,6 @@
 package tech.livx.restservice.sample;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -41,15 +42,21 @@ public class MainActivity extends BaseRestAppCompatActivity {
         requestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                doRequest(new WeatherRequest(), true);
+                doRequest(new WeatherRequest(), false);
                 resultTextView.setText("");
             }
         });
 
-        doRequest(new WeatherRequest(), true);
-        resultTextView.setText("");
-
         this.sharedPreferences = getSharedPreferences("weather", MODE_PRIVATE);
+
+
+        findViewById(R.id.button_second_activity).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent secondIntent  = new Intent(MainActivity.this, SideActivity.class);
+                startActivityForResult(secondIntent,1234);
+            }
+        });
     }
 
     @Override
@@ -72,5 +79,15 @@ public class MainActivity extends BaseRestAppCompatActivity {
     @Override
     public void onLoading() {
         progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1234) {
+            doRequest(new WeatherRequest(), false);
+            resultTextView.setText("");
+        }
     }
 }
