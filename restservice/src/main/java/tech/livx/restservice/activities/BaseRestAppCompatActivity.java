@@ -135,6 +135,7 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
             public void run() {
                 dataService.removeListener(BaseRestAppCompatActivity.this);
                 unbindService(BaseRestAppCompatActivity.this);
+                isBound = false;
             }
         };
 
