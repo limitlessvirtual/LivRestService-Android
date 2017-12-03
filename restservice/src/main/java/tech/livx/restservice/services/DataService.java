@@ -76,6 +76,11 @@ public class DataService extends Service {
         return false;
     }
 
+    public boolean anyPending()
+    {
+        return !pendingRequests.isEmpty();
+    }
+
     public int checkResult(String requestType) {
         int code = getSharedPreferences(DATA_PREF, MODE_PRIVATE ).getInt(requestType, 0);
         getSharedPreferences(DATA_PREF, MODE_PRIVATE).edit().remove(requestType).apply();
