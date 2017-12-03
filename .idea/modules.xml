@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidRestService.iml" filepath="$PROJECT_DIR$/AndroidRestService.iml" />
       <module fileurl="file://$PROJECT_DIR$/RestServiceSample.iml" filepath="$PROJECT_DIR$/RestServiceSample.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/restservice/restservice.iml" filepath="$PROJECT_DIR$/restservice/restservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/restservice/restservice.iml" filepath="$PROJECT_DIR$/restservice/restservice.iml" />
     </modules>
   </component>
