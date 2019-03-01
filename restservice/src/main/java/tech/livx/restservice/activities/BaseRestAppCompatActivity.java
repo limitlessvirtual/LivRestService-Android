@@ -9,8 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import tech.livx.restservice.requests.RestRequest;
 import tech.livx.restservice.services.DataService;
@@ -26,7 +26,7 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
 
     private boolean isBound = false;
     private DataService dataService;
-    private ConcurrentHashMap<String, Long> currentRequests;
+    private HashMap<String, Long> currentRequests;
     private List<Runnable> runWhenServiceReady = new ArrayList<>();
 
     @Override
@@ -34,10 +34,10 @@ public abstract class BaseRestAppCompatActivity extends AppCompatActivity implem
         super.onCreate(savedInstanceState);
 
         if(savedInstanceState != null) {
-            currentRequests = (ConcurrentHashMap<String,Long>)savedInstanceState.getSerializable("currentRequests");
+            currentRequests = (HashMap<String,Long>)savedInstanceState.getSerializable("currentRequests");
         } else {
 
-            currentRequests = new ConcurrentHashMap<>();
+            currentRequests = new HashMap<>();
         }
     }
 
